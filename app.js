@@ -42,7 +42,7 @@ app.post('/auth/register', async(req, res) => {
 //Check if user exists - checando se o usuário existe
 const userExists = await User.findOne({ email:email})
 
-    if(!userExists) {
+    if(userExists) {
         return res.status(422).json({msg: 'Já existe um usuário com este e-mail. Por favor, utilize outro'})
     }
 
@@ -83,5 +83,12 @@ app.post("/auth/login", async (req, res) => {
         return res.status(422).json({msg: 'A senha é obrigatória'})
     }
 })
+
+//check if user exists - checando se o usuário existe
+const user = await User.findOne({ email:email})
+
+    if(!user) {
+        return res.status(422).json({msg: 'Usuário não encontrado'})
+    }
 
 app.listen(8000)
