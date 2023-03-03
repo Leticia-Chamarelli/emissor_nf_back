@@ -65,7 +65,22 @@ const user = new User({
     }catch(error) {
         console.log(error)
 
-        res.status(500).json({msg: 'Houve um erro no servidos, tente novamente mais tarde'})
+        res.status(500).json({msg: 'Houve um erro no servidor, tente novamente mais tarde'})
+    }
+})
+
+//Login user - login do usuário
+app.post("/auth/login", async (req, res) => {
+
+    const { email, password } = re.body
+    
+    // Validations - validações
+    if(!email) {
+        return res.status(422).json({msg: 'O e-mail é obrigatório'})
+    }
+
+    if(!password) {
+        return res.status(422).json({msg: 'A senha é obrigatória'})
     }
 })
 
