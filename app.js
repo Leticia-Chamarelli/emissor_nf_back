@@ -46,6 +46,10 @@ const userExists = await User.findOne({ email:email})
         return res.status(422).json({msg: 'Já existe um usuário com este e-mail. Por favor, utilize outro'})
     }
 
+//Create password - criando senha
+const salt = await bcrypt.genSalt(12)
+const passwordHash = await bcrypt.hash(password, salt)
+
 })
 
 app.listen(8000)
