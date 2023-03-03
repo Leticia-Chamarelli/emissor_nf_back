@@ -50,6 +50,23 @@ const userExists = await User.findOne({ email:email})
 const salt = await bcrypt.genSalt(12)
 const passwordHash = await bcrypt.hash(password, salt)
 
+// Create user - criando usuário
+const user = new User({
+    name,
+    email,
+    password,
+})
+
+    try {
+        await user.save()
+
+        res.status(201).json({msg: 'Usuário criado com sucesso'})
+
+    }catch(error) {
+        console.log(error)
+
+        res.status(500).json({msg: 'Houve um erro no servidos, tente novamente mais tarde'})
+    }
 })
 
 app.listen(8000)
