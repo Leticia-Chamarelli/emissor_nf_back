@@ -98,4 +98,24 @@ const user = await User.findOne({ email:email})
         return res.status(422).json({msg: 'Senha inválida'})
     }
 
+    try {
+
+        const secret = process.env.SECRET
+
+        const token = jwt.sign(
+            {
+            id: user._id,
+            }, 
+        secret,
+        )
+
+        res.status(200).json({msg: 'Autenticação realizada com sucesso', token})
+
+    } catch (err) {
+        console.log(error)
+
+        res.status(500).json({msg: 'Aconteceu algo no servidor, tente novamente mais tarde'})
+
+    }
+
 app.listen(8000)
