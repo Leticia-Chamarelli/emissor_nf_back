@@ -38,6 +38,14 @@ app.post('/auth/register', async(req, res) => {
     if(password !== confirmPassword) {
         return res.status(422).json({msg: 'As senhas não conferem'})
     }
+
+//Check if user exists - checando se o usuário existe
+const userExists = await User.findOne({ email:email})
+
+    if(!userExists) {
+        return res.status(422).json({msg: 'Já existe um usuário com este e-mail. Por favor, utilize outro'})
+    }
+
 })
 
 app.listen(8000)
