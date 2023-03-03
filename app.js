@@ -17,6 +17,19 @@ app.get('/', (req, res) => {
     res.status(200).json({mgs: 'Bem vindo a nossa API'})
 })
 
+//Private route - rota privada 
+app.get("/user/:id", async (req, res) =>{
+
+    const id = re.params.id
+
+    //check if user exists 
+    const user = await User.findById(id, '-password')
+
+    if (!user) {
+        return res.status(404).json({msg: 'Usuário não encontrado'})
+    }
+})
+
 //Register User - Registrando usuário
 app.post('/auth/register', async(req, res) => {
 
