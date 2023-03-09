@@ -1,7 +1,7 @@
 const User =  {
-    name: String,
-    email: String,
-    password: String
+    name: Text,
+    email: Text,
+    password: Text,
 }
 
 module.exports = User
